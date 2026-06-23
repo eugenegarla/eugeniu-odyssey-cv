@@ -1,33 +1,34 @@
-# Eugeniu Girla — An Odyssey in Five Landfalls
+# Eugeniu Girla - The Builder's Odyssey
 
-An interactive CV / personal site. Twenty years of building, charted as a voyage across five landfalls
-(The Early Waters → GAUS Algorithm → XOR.ai → Index.dev → MIND), with a classic printable CV view.
+Interactive CV / personal site for Eugeniu Girla.
 
-- **Single file, zero build.** Everything lives in [`index.html`](index.html) — HTML, CSS and vanilla JS.
-  No framework, no bundler, no dependencies (fonts load from Google Fonts).
-- **Two modes:** *The Chart* (explore islands on a nautical map) and *The Crossing* (a linear timeline).
-- **View / Download CV** opens a clean, print-ready CV you can save as PDF from the browser.
+This is a static site with no build step. Cloudflare Pages can deploy it directly from the repository root.
 
-## Run locally
+## Files
 
-Just open the file:
+- `index.html` - live homepage, currently the v2 interactive Odyssey CV
+- `v2.html` - same v2 version kept as a named reference
+- `assets/aegean-journey-map.png` - visual map asset used by the site
 
-```bash
-open index.html        # macOS
-```
-
-Or serve it (any static server works):
+## Local Preview
 
 ```bash
 python3 -m http.server 8000
-# then visit http://localhost:8000
 ```
 
-## Deploy
+Then open:
 
-This is a static site — `index.html` at the repo root is all that's served. It works on Cloudflare Pages,
-GitHub Pages, Netlify, or any static host. See deployment steps in the project notes.
+```text
+http://localhost:8000
+```
 
-## License
+## Cloudflare Pages
 
-Personal CV content © Eugeniu Girla. Code free to reuse.
+Use these settings:
+
+- Framework preset: None
+- Build command: leave empty
+- Build output directory: `/`
+- Root directory: `/`
+
+The site is plain HTML/CSS/JS and can also be hosted on GitHub Pages, Netlify, or any static host.
