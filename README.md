@@ -1,34 +1,21 @@
-# Eugeniu Girla - The Builder's Odyssey
+# Eugeniu Girla: Building What Comes Next
 
-Interactive CV / personal site for Eugeniu Girla.
+Personal CV website at https://eugeniugirla.com/.
 
-This is a static site with no build step. Cloudflare Pages can deploy it directly from the repository root.
+Static HTML, CSS and JavaScript. No installation or build step is required. Cloudflare Pages deploys the repository root from `main`.
 
-## Files
+## Website Files
 
-- `index.html` - live homepage, currently the v2 interactive Odyssey CV
-- `v2.html` - same v2 version kept as a named reference
-- `assets/aegean-journey-map.png` - visual map asset used by the site
+- `index.html`: homepage, career chapters and accessible full-CV dialog.
+- `cv.html`: standalone CV with print/save-PDF support.
+- `style.css`, `app.js`: presentation and interactions.
+- `assets/content.js`: preserved career, education, certificate and language data.
+- `assets/icons.js`, `assets/LUCIDE-LICENSE.txt`: bundled Lucide icons and license.
+- `assets/eugeniu-girla-portrait.jpg`: supplied original photograph, copied without retouching or resampling; desktop and mobile framing uses CSS.
+- `robots.txt`, `sitemap.xml`: public indexing metadata.
 
-## Local Preview
+The older named versions and assets remain in the repository as historical references. They are not used by the current homepage.
 
-```bash
-python3 -m http.server 8000
-```
+## Preview
 
-Then open:
-
-```text
-http://localhost:8000
-```
-
-## Cloudflare Pages
-
-Use these settings:
-
-- Framework preset: None
-- Build command: leave empty
-- Build output directory: `/`
-- Root directory: `/`
-
-The site is plain HTML/CSS/JS and can also be hosted on GitHub Pages, Netlify, or any static host.
+Open `index.html` directly, or serve this directory with any static web server. The website does not depend on third-party fonts, analytics, or external scripts.

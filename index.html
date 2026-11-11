@@ -1,609 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eugeniu Girla — The Builder's Odyssey</title>
-<meta name="description" content="Eugeniu Girla — 5× Founder &amp; Builder · HR Technology · AI &amp; Talent. An interactive career journey across twenty years of building, from Moldova to Athens.">
-<meta property="og:title" content="Eugeniu Girla — The Builder's Odyssey">
-<meta property="og:description" content="5× Founder &amp; Builder · HR Technology · AI &amp; Talent. Twenty years of building markets, ventures and talent platforms.">
-<meta property="og:image" content="assets/athens-executive-hero-v2.jpg">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0d1f2a; --muted:#5a6a72; --sea:#0d4f6d; --deep:#062533; --abyss:#04161f;
-    --foam:#f5fbf8; --paper:#ffffff; --gold:#d9a441; --gold-soft:#e9c477; --coral:#dd6f57; --mint:#79bba7;
-    --line:rgba(13,31,42,.14); --line-soft:rgba(13,31,42,.08);
-    --shadow:0 22px 80px rgba(6,37,51,.18);
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --serif:'Spectral',Georgia,serif;
-    --sans:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{color:var(--ink);background:var(--foam);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-  ul{list-style:none}
-  ::selection{background:rgba(217,164,65,.28)}
-  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
-  h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
-
-  @keyframes odRing{0%{transform:translate(-50%,-50%) scale(.7);opacity:.7}100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
-  @keyframes odPulse{0%,100%{box-shadow:0 0 0 0 rgba(217,164,65,.5),0 0 18px rgba(217,164,65,.6)}50%{box-shadow:0 0 0 6px rgba(217,164,65,0),0 0 26px rgba(217,164,65,.85)}}
-  @keyframes odUp{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
-  @keyframes odDraw{to{stroke-dashoffset:0}}
-
-  /* ---------------- HERO ---------------- */
-  .hero{position:relative;min-height:96vh;display:grid;align-items:end;padding:24px clamp(18px,4vw,64px) 150px;color:#fff;isolation:isolate;overflow:hidden}
-  .hero-map,.hero-shade{position:absolute;inset:0}
-  .hero-map{width:100%;height:100%;object-fit:cover;z-index:-3}
-  .hero-shade{z-index:-2;background:
-    linear-gradient(90deg,rgba(4,22,31,.94) 0%,rgba(4,22,31,.66) 40%,rgba(4,22,31,.08) 100%),
-    linear-gradient(0deg,rgba(4,22,31,.92) 0%,rgba(4,22,31,0) 46%)}
-  .topbar{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:flex-end;padding:20px clamp(18px,4vw,64px);font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.82)}
-  .topbar a,.topbar span{display:inline-flex;align-items:center;gap:6px}
-  .topbar a{border-bottom:1px solid rgba(255,255,255,.38);padding-bottom:1px;transition:border-color .2s,color .2s}
-  .topbar a:hover{color:#fff;border-color:var(--gold)}
-  .topbar .sep{opacity:.4}
-  .topbar .cvlink{border:1px solid rgba(255,255,255,.45);border-radius:3px;padding:6px 12px;letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
-  .topbar .cvlink:hover{background:var(--gold);border-color:var(--gold);color:#142029}
-
-  .hero-content{width:min(880px,100%);animation:odUp .8s ease both}
-  .hero h1{font-size:clamp(3.4rem,9vw,7.4rem);line-height:.9;margin:14px 0 0;font-weight:400}
-  .hero-copy{width:min(640px,100%);margin:26px 0 0;color:rgba(255,255,255,.9);font-size:clamp(1.1rem,2.1vw,1.45rem);line-height:1.5;font-weight:300;font-family:var(--serif)}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-  .btn{display:inline-flex;min-height:48px;align-items:center;justify-content:center;border-radius:4px;padding:0 22px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;transition:.25s}
-  .btn-primary{background:var(--gold);color:#142029}
-  .btn-primary:hover{background:var(--gold-soft);transform:translateY(-1px)}
-  .btn-ghost{border:1px solid rgba(255,255,255,.45);color:#fff;backdrop-filter:blur(8px)}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-
-  .signal-strip{position:absolute;left:clamp(18px,4vw,64px);right:clamp(18px,4vw,64px);bottom:30px;z-index:4;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid rgba(255,255,255,.2);border-radius:5px;background:rgba(6,37,51,.46);backdrop-filter:blur(14px);overflow:hidden}
-  .signal-strip div{padding:18px 20px;border-right:1px solid rgba(255,255,255,.16)}
-  .signal-strip div:last-child{border-right:0}
-  .signal-strip strong{display:block;font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1;color:#fff;font-weight:400}
-  .signal-strip span{display:block;margin-top:7px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.7)}
-
-  /* ---------------- JOURNEY ---------------- */
-  .journey,.synthesis,.proof{padding:clamp(56px,8vw,104px) clamp(18px,4vw,64px)}
-  .sec-head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:clamp(24px,4vw,60px);align-items:end}
-  .sec-head h2{font-size:clamp(2.1rem,4.6vw,4rem);line-height:1}
-  .sec-head>p:last-child{color:var(--muted);font-size:1.06rem;line-height:1.62;font-family:var(--serif)}
-
-  .console{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:20px;margin-top:38px;align-items:stretch}
-  .map-panel{position:relative;min-height:540px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--deep);box-shadow:var(--shadow)}
-  .map-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter 1s ease;filter:brightness(.62) saturate(.72) contrast(1.02)}
-  .map-haze{position:absolute;inset:0;background:radial-gradient(120% 90% at 70% 25%,rgba(4,22,31,.1),rgba(4,22,31,.62));transition:opacity 1s ease;pointer-events:none}
-  .map-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:46px 46px;opacity:.5}
-  .route-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .route-svg polyline{fill:none;stroke:var(--gold);stroke-width:1.1;stroke-dasharray:2.4 2.4;vector-effect:non-scaling-stroke;opacity:.9;filter:drop-shadow(0 0 6px rgba(217,164,65,.5))}
-
-  .island{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;z-index:2}
-  .island .ring{position:absolute;left:50%;top:8px;width:18px;height:18px;border-radius:50%;border:1px solid var(--gold);animation:odRing 2.4s ease-out infinite;pointer-events:none;display:none}
-  .island .node{width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.45);transition:.5s;position:relative;z-index:1}
-  .island.found .node{background:var(--gold);border-color:var(--gold-soft);animation:odPulse 2.8s ease-in-out infinite}
-  .island.next .node{border-color:var(--gold);background:rgba(217,164,65,.25)}
-  .island .pill{margin-top:11px;padding:5px 10px;border-radius:999px;background:rgba(6,37,51,.72);backdrop-filter:blur(4px);color:rgba(255,255,255,.55);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;white-space:nowrap;transition:.5s;border:1px solid rgba(255,255,255,.12)}
-  .island.found .pill{color:#fff;border-color:rgba(217,164,65,.5)}
-  .island.next .pill{color:rgba(255,255,255,.85)}
-  .island .coord{margin-top:5px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:rgba(255,255,255,.55);opacity:0;transition:.5s}
-  .island.found .coord{opacity:1}
-  .island.active .node{box-shadow:0 0 0 6px rgba(217,164,65,.2),0 0 26px rgba(217,164,65,.9)}
-  .island.active .pill{background:var(--gold);color:#142029;border-color:var(--gold)}
-
-  .map-hint{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.7);pointer-events:none;padding:0 16px}
-
-  .chapter-panel{display:flex;flex-direction:column;min-height:540px;padding:clamp(24px,3vw,36px);border:1px solid var(--line);border-radius:10px;background:var(--paper);box-shadow:var(--shadow)}
-  .chap-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
-  .chap-idx{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-  .chap-prog{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted)}
-  .chap-meta{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
-  .chap-meta span{font-family:var(--mono);padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px}
-  .chapter-panel h3{font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.02;margin-bottom:8px}
-  .chap-sub{color:var(--muted);font-size:1.08rem;line-height:1.5;font-style:italic;font-family:var(--serif);margin-bottom:20px}
-  .chap-points{display:grid;gap:12px;margin-bottom:22px}
-  .chap-points li{position:relative;padding-left:20px;line-height:1.55;font-size:.97rem;color:#26343b}
-  .chap-points li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--coral)}
-  .chap-proof{margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
-  .chap-proof .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .chap-proof strong{display:block;margin-top:8px;color:var(--sea);font-size:1.16rem;line-height:1.36;font-family:var(--serif);font-weight:500}
-  .chap-treasure{display:inline-flex;align-items:baseline;gap:9px;margin-top:16px;border:1px solid var(--gold);border-radius:3px;padding:8px 12px}
-  .chap-treasure b{font-family:var(--serif);font-size:1.25rem;color:var(--gold);font-weight:500}
-  .chap-treasure em{font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-
-  /* ---------------- SYNTHESIS ---------------- */
-  .synthesis{background:#eef5f2;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:clamp(28px,4vw,64px);align-items:center}
-  .synthesis h2{font-size:clamp(2.1rem,4.6vw,4rem);line-height:1.02}
-  .synthesis .lead{margin-top:18px;color:var(--muted);font-size:1.08rem;line-height:1.64;font-family:var(--serif)}
-  .assembled{display:grid;gap:11px}
-  .line-part{display:flex;align-items:center;gap:12px;padding:16px 18px;border:1px solid var(--line-soft);border-left:5px solid var(--mint);border-radius:8px;background:rgba(255,255,255,.7);color:rgba(13,31,42,.5);font-weight:600;transition:.4s}
-  .line-part .lp-num{font-family:var(--mono);font-size:11px;opacity:.6}
-  .line-part.active{color:var(--ink);border-left-color:var(--gold);background:#fff;transform:translateX(6px);box-shadow:0 8px 24px rgba(6,37,51,.07)}
-
-  /* ---------------- PROOF ---------------- */
-  .proof{background:var(--deep);color:#fff}
-  .proof-grid{display:grid;grid-template-columns:.82fr repeat(2,minmax(0,1fr));gap:18px;margin-top:8px}
-  .proof .section-title{grid-row:span 2;padding-right:24px}
-  .proof .section-title h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.02}
-  .proof .section-title p{margin-top:14px;color:rgba(255,255,255,.66);line-height:1.6;font-family:var(--serif)}
-  .proof article{min-height:210px;padding:24px;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:rgba(255,255,255,.06);transition:.3s}
-  .proof article:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
-  .proof article .tag{font-family:var(--mono);color:var(--gold);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-  .proof article h3{margin:14px 0 10px;font-size:1.35rem;line-height:1.16;color:#fff;font-family:var(--serif);font-weight:500}
-  .proof article p{color:rgba(255,255,255,.72);line-height:1.6;font-size:.96rem}
-
-  /* ---------------- FOOTER ---------------- */
-  footer{background:var(--abyss);color:rgba(255,255,255,.8);padding:clamp(40px,6vw,72px) clamp(18px,4vw,64px);display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between}
-  footer .fname{font-family:var(--serif);font-size:1.5rem;color:#fff}
-  footer .fcontact{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.7)}
-  footer .fcontact a:hover{color:var(--gold)}
-
-  /* ---------------- CV MODAL ---------------- */
-  #cvModal{position:fixed;inset:0;z-index:90;background:rgba(4,22,31,.62);overflow-y:auto;padding:clamp(16px,3vw,44px);display:none}
-  #cvModal.open{display:block;animation:odUp .4s ease both}
-  .cv-doc{max-width:840px;margin:0 auto;background:#fdfbf6;color:#1d2b30;border-radius:4px;padding:clamp(34px,5vw,64px);box-shadow:0 30px 90px rgba(6,37,51,.4)}
-  .cv-tools{display:flex;justify-content:flex-end;gap:10px;margin-bottom:24px}
-  .cv-tools button{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:10px 18px;border-radius:3px;border:1px solid var(--line)}
-  .cv-tools .print{border-color:var(--gold);color:#a9791f}
-  .cv-doc h1{font-family:var(--serif);font-size:34px;margin-bottom:6px;color:#1d2b30}
-  .cv-role{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:#a9791f;margin-bottom:6px}
-  .cv-contact{font-family:var(--mono);font-size:10.5px;color:#857c6b;margin-bottom:24px}
-  .cv-rule{height:2px;background:#1d2b30;margin-bottom:22px}
-  .cv-sec{margin-bottom:26px}
-  .cv-sec>.t{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a9791f;margin-bottom:14px}
-  .cv-entry{margin-bottom:14px}
-  .cv-entry .h{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between}
-  .cv-entry .head{font-weight:600;font-size:15px}
-  .cv-entry .meta{font-family:var(--mono);font-size:10px;color:#857c6b}
-  .cv-entry .sub{font-style:italic;font-weight:300;font-size:13px;color:#4a5860;margin-top:3px;font-family:var(--serif)}
-  .cv-entry .b{display:flex;gap:9px;font-weight:300;font-size:13px;line-height:1.5;color:#33454b;margin-top:6px}
-  .cv-entry .b::before{content:"";flex:none;margin-top:7px;width:4px;height:4px;transform:rotate(45deg);background:#c08a2e}
-
-  /* ---------------- RESPONSIVE ---------------- */
-  @media(max-width:980px){
-    .sec-head,.synthesis,.console,.proof-grid{grid-template-columns:1fr}
-    .proof .section-title{grid-row:auto}
-    .map-panel,.chapter-panel{min-height:460px}
-    .signal-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .signal-strip div:nth-child(2){border-right:0}
-    .signal-strip div:nth-child(1),.signal-strip div:nth-child(2){border-bottom:1px solid rgba(255,255,255,.16)}
-    .hero{padding-bottom:230px}
-  }
-  @media(max-width:560px){
-    .topbar{justify-content:flex-start;font-size:11px}
-    .island .node{width:13px;height:13px}
-    .island .pill{font-size:9.5px}
-    .map-panel{min-height:400px}
-    footer{flex-direction:column;align-items:flex-start}
-  }
-  @media print{
-    body>*{display:none !important}
-    #cvModal{display:block !important;position:static !important;background:#fff !important;padding:0 !important;overflow:visible !important}
-    .cv-tools{display:none !important}
-    .cv-doc{box-shadow:none !important;max-width:none !important;margin:0 !important}
-  }
-
-  /* ===================== EXECUTIVE EDITORIAL SYSTEM ===================== */
-  :root{
-    --ink:#17232b;
-    --muted:#687279;
-    --sea:#254c5d;
-    --deep:#13252f;
-    --abyss:#0a171e;
-    --foam:#f3f4f1;
-    --paper:#ffffff;
-    --gold:#b18a4a;
-    --gold-soft:#d1b27a;
-    --coral:#8d5b4f;
-    --mint:#627f78;
-    --line:rgba(23,35,43,.18);
-    --line-soft:rgba(23,35,43,.09);
-    --shadow:0 20px 54px rgba(9,24,31,.1);
-  }
-  body{background:#f4f6f4;color:var(--ink)}
-  h1,h2,h3{font-family:var(--sans);font-weight:750;letter-spacing:0}
-  .eyebrow{font-size:10.5px;letter-spacing:.16em;color:var(--gold);font-weight:700}
-
-  .hero{min-height:clamp(720px,88svh,920px);align-items:center;padding-top:116px;padding-bottom:170px}
-  .hero-map{filter:saturate(.7) contrast(1.06) brightness(.76);object-position:center center}
-  .hero-shade{background:
-    linear-gradient(90deg,rgba(7,18,25,.96) 0%,rgba(7,18,25,.84) 35%,rgba(7,18,25,.38) 67%,rgba(7,18,25,.12) 100%),
-    linear-gradient(0deg,rgba(7,18,25,.86) 0%,rgba(7,18,25,.08) 45%)}
-  .topbar{font-size:11px;color:rgba(255,255,255,.76);border-bottom:1px solid rgba(255,255,255,.12);background:rgba(7,18,25,.2);backdrop-filter:blur(10px)}
-  .topbar .cvlink{border-radius:2px}
-  .hero-content{width:min(800px,100%);animation:none}
-  .hero h1{font-size:clamp(3.5rem,7vw,6.35rem);line-height:.96;font-weight:800;margin-top:18px}
-  .hero-role{margin-top:18px;color:var(--gold-soft);font-size:clamp(.9rem,1.35vw,1.05rem);font-weight:650;letter-spacing:.04em;text-transform:uppercase}
-  .hero-copy{width:min(680px,100%);font-family:var(--sans);font-size:clamp(1.05rem,1.55vw,1.23rem);line-height:1.62;font-weight:400;color:rgba(255,255,255,.86);margin-top:24px}
-  .btn{border-radius:2px;min-height:46px;font-size:10.5px;letter-spacing:.12em}
-  .btn-primary{background:var(--gold);color:#111c22}
-  .btn-primary:hover{background:var(--gold-soft)}
-  .btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.72)}
-
-  .signal-strip{bottom:28px;border-radius:2px;background:rgba(10,23,30,.78);border-color:rgba(255,255,255,.15);box-shadow:0 16px 42px rgba(0,0,0,.14)}
-  .signal-strip div{padding:17px 20px}
-  .signal-strip strong{font-family:var(--sans);font-weight:750;font-size:clamp(1.35rem,2.2vw,1.85rem)}
-  .signal-strip span{font-size:10px;color:rgba(255,255,255,.68);text-transform:uppercase;letter-spacing:.08em}
-
-  .journey,.synthesis,.proof{padding-top:clamp(70px,8vw,112px)}
-  .sec-head h2,.synthesis h2,.proof .section-title h2{font-family:var(--sans);font-weight:750;font-size:clamp(2rem,4vw,3.5rem);line-height:1.06}
-  .sec-head>p:last-child,.synthesis .lead,.proof .section-title p{font-family:var(--sans);font-size:1rem;line-height:1.7;color:var(--muted)}
-  .console{gap:22px;margin-top:42px}
-  .map-panel,.chapter-panel{border-radius:3px;box-shadow:var(--shadow)}
-  .map-panel{background:#1a2a33}
-  .map-img{filter:brightness(.68) saturate(.72) contrast(1.04) !important}
-  .map-haze{background:linear-gradient(135deg,rgba(12,27,35,.16),rgba(12,27,35,.3));opacity:1 !important}
-  .map-grid{display:none}
-  .route-svg polyline{stroke:rgba(210,178,122,.92);stroke-width:1.4;stroke-dasharray:0;filter:none}
-
-  .island{gap:0;min-width:82px}
-  .island .ring{display:none !important}
-  .island .node{
-    display:grid;place-items:center;width:30px;height:30px;border-radius:50%;transform:none;
-    background:rgba(18,37,47,.88);border:1px solid rgba(255,255,255,.58);
-    color:#fff;font:600 9px var(--mono);letter-spacing:.02em;box-shadow:0 2px 8px rgba(0,0,0,.2);animation:none !important
-  }
-  .island.found .node{background:#f4f0e7;border-color:#f4f0e7;color:#182a33;animation:none !important}
-  .island.next .node{border-color:var(--gold-soft)}
-  .island.active .node{background:var(--gold);border-color:#e3c893;color:#12222b;box-shadow:0 0 0 4px rgba(177,138,74,.22)}
-  .island .pill{
-    margin-top:8px;border-radius:2px;background:rgba(244,240,231,.92);
-    color:#1a2b34;border:1px solid rgba(255,255,255,.32);
-    font-size:9.5px;font-weight:600;letter-spacing:.03em;padding:5px 8px;box-shadow:0 2px 8px rgba(0,0,0,.12)
-  }
-  .island.active .pill{background:#132a35;color:#fff;border-color:rgba(255,255,255,.46)}
-  .island .coord{display:none}
-  .map-hint{bottom:0;padding:12px 16px;background:linear-gradient(0deg,rgba(11,24,31,.9),rgba(11,24,31,0));font-size:9.5px;color:rgba(255,255,255,.75)}
-
-  .chapter-panel{background:#fff;padding:clamp(28px,3vw,40px);border-top:3px solid var(--gold)}
-  .chap-idx,.chap-prog,.chap-meta span{font-size:10.5px}
-  .chap-idx{color:var(--gold)}
-  .chapter-panel h3{font-family:var(--sans);font-weight:750;font-size:clamp(1.8rem,3vw,2.45rem);line-height:1.1}
-  .chap-sub{font-family:var(--sans);font-style:normal;font-size:1rem;line-height:1.6;color:var(--muted)}
-  .chap-points li{font-size:.95rem;color:#26343b}
-  .chap-points li::before{width:12px;height:1px;background:var(--gold);border-radius:0;transform:none;top:.75em}
-  .chap-proof strong{font-family:var(--sans);font-weight:750;color:#17465a;font-size:1.06rem}
-  .chap-treasure{border-color:rgba(177,138,74,.42);background:#faf7ef;border-radius:2px}
-  .chap-treasure b{font-family:var(--sans);font-weight:800;color:var(--gold)}
-  .chap-treasure em{font-size:9.5px;color:#6c6254}
-
-  .synthesis{background:#e8edeb}
-  .assembled .line-part{border-radius:2px;background:rgba(255,255,255,.76);box-shadow:none}
-  .assembled .line-part.active{border-color:rgba(177,138,74,.38)}
-  .proof{background:#13252f}
-  .proof article{border-radius:2px;background:rgba(255,255,255,.045);border-top:2px solid rgba(177,138,74,.58)}
-  .proof article h3{font-family:var(--sans);font-weight:750}
-  footer .fname{font-family:var(--sans);font-weight:800}
-
-  @media (max-width:620px){
-    .hero{min-height:860px;padding-top:160px;padding-bottom:238px;align-items:center}
-    .hero-map{object-position:62% center}
-    .hero-shade{background:linear-gradient(90deg,rgba(7,18,25,.94),rgba(7,18,25,.55)),linear-gradient(0deg,rgba(7,18,25,.92),rgba(7,18,25,.18))}
-    .topbar{justify-content:flex-start;background:rgba(7,18,25,.52)}
-    .topbar .contact-phone,.topbar .sep{display:none}
-    .hero h1{font-size:clamp(3.15rem,14vw,4.45rem)}
-    .sec-head h2,.synthesis h2,.proof .section-title h2{font-size:clamp(2rem,10vw,3rem)}
-    .island{min-width:66px}
-    .island .node{width:26px;height:26px;font-size:8px}
-    .island .pill{font-size:8.5px;padding:4px 6px}
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f5f7f5">
+  <meta name="description" content="Eugeniu Girla. Growth executive, founder and market builder with HR and L&D DNA. Based in Athens, building globally.">
+  <title>Eugeniu Girla | Building What Comes Next</title>
+  <link rel="canonical" href="https://eugeniugirla.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Eugeniu Girla | Building What Comes Next">
+  <meta property="og:description" content="Growth executive, founder and market builder with HR and L&amp;D DNA. Based in Athens, building globally.">
+  <meta property="og:url" content="https://eugeniugirla.com/">
+  <meta property="og:image" content="https://eugeniugirla.com/assets/eugeniu-girla-portrait.jpg">
+  <meta property="og:image:width" content="1344">
+  <meta property="og:image:height" content="2016">
+  <meta property="og:image:alt" content="Eugeniu Girla">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://eugeniugirla.com/","dateModified":"2026-11-11","mainEntity":{"@type":"Person","@id":"https://eugeniugirla.com/#person","name":"Eugeniu Girla","url":"https://eugeniugirla.com/","jobTitle":"Global Growth Partner & Board Member","image":"https://eugeniugirla.com/assets/eugeniu-girla-portrait.jpg","homeLocation":{"@type":"City","name":"Athens"},"sameAs":["https://www.linkedin.com/in/eugeniugirla"]}}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23222825'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial' font-size='29' fill='%23fff'%3EEG%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/eugeniu-girla-portrait.jpg" as="image">
+  <link rel="stylesheet" href="style.css?v=8f9b8d52e3e3">
+  <script defer src="assets/content.js"></script>
+  <script defer src="assets/icons.js"></script>
+  <script defer src="app.js?v=e6b5f8f4810b"></script>
 </head>
 <body>
-
-  <!-- ===================== HERO ===================== -->
-  <section class="hero">
-    <img class="hero-map" src="assets/athens-executive-hero-v2.jpg" alt="Athens and the Saronic Gulf at blue hour, viewed from a contemporary stone terrace" fetchpriority="high" decoding="async">
-    <div class="hero-shade"></div>
-    <nav class="topbar" aria-label="Contact">
-      <a href="mailto:eugen.girla@gmail.com">eugen.girla@gmail.com</a>
-      <a href="https://www.linkedin.com/in/eugeniugirla" target="_blank" rel="noopener">LinkedIn</a>
-      <span class="contact-phone">+30 698 018 48 70</span>
-      <span class="sep">·</span>
-      <span>Athens, GR</span>
-      <a class="cvlink" href="#" data-open-cv>View / Download CV</a>
-    </nav>
-
-    <div class="hero-content">
-      <p class="eyebrow">Global Growth Partner &amp; Board Member · Index.dev</p>
-      <h1>Eugeniu Girla</h1>
-      <p class="hero-role">Growth Executive · Founder · Market Builder</p>
-      <p class="hero-copy">For twenty years, I have started and grown markets, ventures and talent platforms. I am fluent in the language of HR leaders because I have been one.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#journey">Review the journey</a>
-        <a class="btn btn-ghost" href="#" data-open-cv>Open full CV</a>
-      </div>
+  <a class="skip-link" href="#experience">Skip to experience</a>
+  <header class="site-header">
+    <div class="shell header-row">
+      <a class="brand" href="#home" aria-label="Eugeniu Girla, home"><span class="monogram">eg<span>.</span></span><span class="brand-name">Eugeniu Girla</span></a>
+      <nav aria-label="Main navigation"><a href="#experience">Experience</a><a class="perspective-nav" href="#perspective">Perspective</a><a href="#contact">Let's talk<i data-icon="ArrowUpRight"></i></a></nav>
+      <a class="cv-link" href="cv.html" data-open-cv><i data-icon="FileText"></i><span>Full CV</span></a>
     </div>
-
-    <div class="signal-strip" aria-label="Career signals">
-      <div><strong>5×</strong><span>ventures co-founded</span></div>
-      <div><strong>20 yrs</strong><span>in HR, talent &amp; AI</span></div>
-      <div><strong>10×</strong><span>talent network growth</span></div>
-      <div><strong>10+</strong><span>countries</span></div>
-    </div>
-  </section>
-
-  <!-- ===================== JOURNEY ===================== -->
-  <section class="journey" id="journey">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">The Builder's Odyssey</p>
-        <h2>A career route built through markets, teams and products.</h2>
-      </div>
-      <p>From a blank-sheet NGO at nineteen to an AI recruitment startup before the world's obsession, from zero-market EMEA growth to board-level platform expansion. Explore the route to see the repeated pattern: build trust, build systems, build markets.</p>
-    </div>
-
-    <div class="console">
-      <section class="map-panel" aria-label="Interactive career map">
-        <img class="map-img" id="mapImg" src="assets/executive-journey-chart-v2.jpg" alt="" loading="lazy" decoding="async">
-        <div class="map-haze" id="mapHaze"></div>
-        <div class="map-grid"></div>
-        <svg class="route-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline id="routeLine" points=""></polyline></svg>
-        <div id="markers"></div>
-        <div class="map-hint" id="mapHint"></div>
-      </section>
-
-      <aside class="chapter-panel" aria-live="polite">
-        <div class="chap-top">
-          <span class="chap-idx" id="chapIdx">Milestone I</span>
-          <span class="chap-prog" id="chapProg">1 / 6 reviewed</span>
+  </header>
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-name">
+      <div class="hero-plane" aria-hidden="true"></div>
+      <div class="shell hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow hero-location"><span class="location-mark" aria-hidden="true"></span>Athens, Greece. Building globally.</p>
+          <div class="hero-name-row"><h1 id="hero-name">Eugeniu<br>Girla<span>.</span></h1><div class="mobile-portrait"><img src="assets/eugeniu-girla-portrait.jpg" alt="Eugeniu Girla" width="1344" height="2016" decoding="async"></div></div>
+          <h2>Growth executive.<br>Founder instincts. <span>HR/L&amp;D DNA.</span></h2>
+          <p class="hero-copy">For twenty years, I have started and grown markets, ventures and talent platforms. I am fluent in the language of HR leaders because I have been one.</p>
+          <div class="hero-actions"><a class="button button-dark" href="#contact">Let's build what's next<i data-icon="ArrowUpRight"></i></a><a class="text-link" href="#experience">Explore the journey<i data-icon="ArrowDown"></i></a></div>
         </div>
-        <div class="chap-meta"><span id="chapYears"></span><span id="chapPlace"></span></div>
-        <h3 id="chapTitle"></h3>
-        <p class="chap-sub" id="chapSub"></p>
-        <ul class="chap-points" id="chapPoints"></ul>
-        <div class="chap-proof">
-          <span class="lab">Builder signal</span>
-          <strong id="chapSignal"></strong>
-          <div id="chapTreasureWrap"></div>
+        <figure class="hero-portrait"><img src="assets/eugeniu-girla-portrait.jpg" alt="Eugeniu Girla" width="1344" height="2016" fetchpriority="high" decoding="async"></figure>
+        <div class="hero-current"><span>Currently building</span><p>Global Growth Partner &amp; Board Member, <b>Index.dev</b><span class="current-divider">/</span>Co-building <b>MIND</b></p><a href="#experience" data-case-link="index" aria-label="Explore current work at Index.dev"><i data-icon="ArrowUpRight"></i></a></div>
+      </div>
+    </section>
+
+    <section class="proof-band" aria-label="Twenty years of building, at a glance">
+      <div class="shell proof-row">
+        <a href="#experience" data-case-link="index"><strong>10<span>&times;</span></strong><div><b>Talent network growth</b><span>2,000 &rarr; 20,000 professionals</span></div><i data-icon="ArrowUpRight"></i></a>
+        <a href="#experience" data-case-link="gaus"><strong>5<span>&times;</span></strong><div><b>Ventures co-founded</b><span>Ideas turned into businesses</span></div><i data-icon="ArrowUpRight"></i></a>
+        <a href="#experience" data-case-link="ventures"><strong>20<span>yrs</span></strong><div><b>People, learning &amp; growth</b><span>HR, talent and technology</span></div><i data-icon="ArrowUpRight"></i></a>
+        <a href="#experience" data-case-link="aiesec"><strong>10<span>+</span></strong><div><b>Countries</b><span>International experience</span></div><i data-icon="ArrowUpRight"></i></a>
+      </div>
+    </section>
+
+    <section class="experience section-pad" id="experience" aria-labelledby="experience-title">
+      <span id="journey" class="legacy-anchor" aria-hidden="true"></span>
+      <div class="shell">
+        <div class="section-label"><span>01 / The journey</span><span>2005 &mdash; Present</span></div>
+        <div class="section-heading"><h2 id="experience-title">Different chapters.<br><span>The same drive to build.</span></h2><p>People systems. Ventures. New markets.<br>Talent platforms. The next AI chapter.</p></div>
+        <div class="career-thread" role="tablist" aria-label="Explore career chapters">
+          <button id="tab-aiesec" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="aiesec"><span class="thread-dot" aria-hidden="true"></span><small>2005 &ndash; 2008</small><b>Start</b><span>AIESEC</span></button>
+          <button id="tab-ventures" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="ventures"><span class="thread-dot" aria-hidden="true"></span><small>2008 &ndash; 2019</small><b>Found</b><span>Ventures &amp; L&amp;D</span></button>
+          <button id="tab-gaus" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="gaus"><span class="thread-dot" aria-hidden="true"></span><small>2017 &ndash; 2020</small><b>Invent</b><span>GAUS Algorithm</span></button>
+          <button id="tab-xor" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="xor"><span class="thread-dot" aria-hidden="true"></span><small>2020 &ndash; 2021</small><b>Open</b><span>XOR.ai / EMEA</span></button>
+          <button id="tab-index" role="tab" aria-selected="true" aria-controls="case-panel" data-case="index"><span class="thread-dot" aria-hidden="true"></span><small>2022 &ndash; Present</small><b>Scale</b><span>Index.dev</span></button>
+          <button id="tab-mind" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="mind"><span class="thread-dot" aria-hidden="true"></span><small>2025 &ndash; Present</small><b>Build next</b><span>MIND</span></button>
         </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ===================== SYNTHESIS ===================== -->
-  <section class="synthesis">
-    <div>
-      <p class="eyebrow">What the route builds into</p>
-      <h2>Not a manager of metrics. A builder of markets.</h2>
-      <p class="lead">Each milestone proves one more facet. Together they assemble into a single, clear proposition — building growth systems where HR tech, AI talent, remote engineering platforms and human development meet.</p>
-    </div>
-    <div class="assembled" id="assembled"></div>
-  </section>
-
-  <!-- ===================== PROOF ===================== -->
-  <section class="proof">
-    <div class="proof-grid">
-      <div class="section-title">
-        <p class="eyebrow">Selected Proof</p>
-        <h2>Proof that travels across rooms.</h2>
-        <p>The headlines a hiring committee can scan in thirty seconds — the rest lives in the route above and the full CV.</p>
       </div>
-      <article><span class="tag">Index.dev</span><h3>Global Growth Partner &amp; Board Member</h3><p>Codemotion.us acquisition &amp; integration, the Andela partnership, and talent network growth from 2,000 to 20,000 vetted professionals.</p></article>
-      <article><span class="tag">GAUS Algorithm</span><h3>Co-Founder &amp; CEO</h3><p>A funded AI recruitment startup in Estonia in 2017 — chatbots, matching algorithms and 25+ candidate signals, before AI was the default language of work.</p></article>
-      <article><span class="tag">XOR.ai</span><h3>EMEA Region Director</h3><p>Built the EMEA territory from zero — no team, no pipeline — and opened enterprise HR conversations around AI recruitment automation. Flagship: MOL Group.</p></article>
-      <article><span class="tag">Earlier · 2005–2020</span><h3>Founder &amp; Trainer</h3><p>AIESEC Moldova from a blank sheet, TalentKapital, Kintaly career fairs across 7 countries, and 7+ years training leaders at one of Moldova's top academies.</p></article>
-    </div>
-  </section>
-
-  <footer>
-    <div class="fname">Eugeniu Girla</div>
-    <div class="fcontact">
-      <a href="mailto:eugen.girla@gmail.com">eugen.girla@gmail.com</a>
-      <a href="https://www.linkedin.com/in/eugeniugirla" target="_blank" rel="noopener">in/eugeniugirla</a>
-      <span>+30 698 018 48 70</span>
-      <span>Athens, GR</span>
-      <a href="#" data-open-cv style="color:var(--gold)">View / Download CV</a>
-    </div>
-  </footer>
-
-  <!-- ===================== CV MODAL ===================== -->
-  <div id="cvModal" aria-hidden="true">
-    <div class="cv-doc">
-      <div class="cv-tools">
-        <button class="print" id="cvPrint">Print / Save PDF</button>
-        <button id="cvClose">Close ✕</button>
+      <div class="case-surface" data-tone="index">
+        <div class="shell case-layout" role="tabpanel" id="case-panel" aria-labelledby="tab-index" tabindex="0">
+          <div class="case-visual" id="case-visual"></div>
+          <article class="case-story">
+            <div class="case-metadata"><span id="case-date">2022 &ndash; Present</span><span id="case-location">Athens, Greece</span></div>
+            <h3 id="case-title">Index.dev</h3>
+            <p class="case-role" id="case-role">Global Growth Partner &amp; Board Member</p>
+            <p class="case-summary" id="case-summary">From sourcing to platform, growth, M&amp;A and a board seat.</p>
+            <ul class="case-points" id="case-points"><li>Progressed from Director of Sourcing to VP Talent, VP Talent Platform, and Global Growth Partner &amp; Board Member.</li><li>Grew the supply network from 2,000 to 20,000 vetted professionals &mdash; 10&times; in under two years.</li><li>Led the Codemotion.us acquisition &amp; integration and strategic revenue partnerships including Andela.</li></ul>
+            <details class="case-detail" id="case-detail"><summary><span id="case-detail-title">Four roles. One expanding mandate.</span><i data-icon="Plus"></i></summary><div id="case-detail-body"></div></details>
+          </article>
+        </div>
       </div>
-      <h1>Eugeniu Girla</h1>
-      <div class="cv-role">5× Founder &amp; Builder · HR Technology · AI &amp; Talent</div>
-      <div class="cv-contact">Athens, Greece · eugen.girla@gmail.com · +30 698 018 48 70 · in/eugeniugirla</div>
-      <div class="cv-rule"></div>
-      <div id="cvSections"></div>
-    </div>
-  </div>
+      <div class="shell case-footer"><p id="case-signal">Remote-talent market builder with board-level growth and partnership exposure.</p><div><span id="case-count">05 / 06</span><button class="icon-button" id="previous-case" aria-label="Previous career chapter" title="Previous chapter"><i data-icon="ArrowLeft"></i></button><button class="icon-button" id="next-case" aria-label="Next career chapter" title="Next chapter"><i data-icon="ArrowRight"></i></button></div></div>
+      <noscript><p class="shell">Read the <a href="cv.html">complete CV</a> for all career chapters.</p></noscript>
+    </section>
 
-<script>
-"use strict";
-(function(){
+    <section class="perspective section-pad" id="perspective" aria-labelledby="perspective-title">
+      <div class="shell">
+        <div class="section-label"><span>02 / The perspective</span><span>Builder + founder + HR/L&amp;D</span></div>
+        <div class="perspective-intro"><h2 id="perspective-title">I know the people side.<br><span>I build the business side.</span></h2><p>My work connects corporate learning, startup building and talent platforms. I bring that combination to the decisions, relationships and systems that help a business grow.</p></div>
+        <div class="operating-principles">
+          <article><span class="principle-number">01</span><h3>Start from reality.</h3><p>I've been in the buyer's seat. HR leadership and years of training leaders shape how I understand the people making decisions.</p><a class="text-link" href="#experience" data-case-link="ventures">HR &amp; L&amp;D<i data-icon="ArrowUpRight"></i></a></article>
+          <article><span class="principle-number">02</span><h3>Take ownership.</h3><p>GAUS meant fundraising, product and go-to-market. Index.dev extended that work into talent platforms, partnerships and M&amp;A.</p><a class="text-link" href="#experience" data-case-link="gaus">The founder chapter<i data-icon="ArrowUpRight"></i></a></article>
+          <article><span class="principle-number">03</span><h3>Build with people.</h3><p>AIESEC, corporate learning and international talent markets share one foundation: systems that connect people to opportunity.</p><a class="text-link" href="#experience" data-case-link="aiesec">The foundations<i data-icon="ArrowUpRight"></i></a></article>
+        </div>
+        <blockquote>“I speak the language of HR leaders<br>because <em>I have been one.</em>”</blockquote>
+        <div class="background-row"><details><summary>Languages<span>05<i data-icon="Plus"></i></span></summary><ul id="language-list"></ul></details><details><summary>Education &amp; continued learning<i data-icon="Plus"></i></summary><div id="learning-list"></div></details></div>
+      </div>
+    </section>
 
-  /* ----------------------------- DATA ----------------------------- */
-  // identity facets assembled in the Synthesis section
-  const IDENTITY = ['Builder','Founder','HR & L&D Fluent','Growth Operator','AI Talent Market Builder'];
+    <section class="next section-pad" id="contact" aria-labelledby="next-title">
+      <div class="shell">
+        <div class="section-label"><span>03 / What's next</span><span>Athens-based. International outlook.</span></div>
+        <div class="next-top"><h2 id="next-title">The next chapter.<br><span>Built together.</span></h2><a class="large-arrow" href="mailto:eugen.girla@gmail.com" aria-label="Start a conversation by email"><i data-icon="ArrowUpRight"></i></a></div>
+        <div class="next-fit"><p>My next chapter sits where people, technology and growth meet.</p><div><span>HR technology</span><span>AI &amp; talent platforms</span><span>International growth</span></div></div>
+        <div class="contact-row"><a class="email" href="mailto:eugen.girla@gmail.com">eugen.girla@gmail.com</a><button class="icon-button" id="copy-email" aria-label="Copy email address" title="Copy email address"><i data-icon="Copy"></i></button><span class="copy-status" id="copy-status" role="status"></span><a class="text-link linkedin" href="https://www.linkedin.com/in/eugeniugirla" target="_blank" rel="noopener noreferrer">LinkedIn<i data-icon="ArrowUpRight"></i></a></div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="shell footer-row"><a class="footer-name" href="#home">Eugeniu Girla<span>.</span></a><span>Athens, Greece</span><a href="tel:+306980184870">+30 698 018 48 70</a><a href="cv.html" data-open-cv>Full CV<i data-icon="FileText"></i></a><a class="back-top" href="#home" aria-label="Back to top" title="Back to top"><i data-icon="ArrowUpRight"></i></a></div></footer>
 
-  // chapters in journey order; `unlock` = highest identity index this milestone proves
-  const CHAPTERS = [
-    { id:'aiesec', short:'AIESEC', title:'AIESEC Moldova & Ukraine', place:'Moldova & Ukraine', coord:'47°00′N 28°52′E',
-      years:'2005 – 2008', x:22, y:76, unlock:0, treasure:{value:'10+',label:'countries'},
-      sub:'Built the first leadership operating system — from a blank sheet at nineteen.',
-      points:[
-        'Built AIESEC Moldova from a blank sheet into one of the country’s strongest youth organizations — still running today.',
-        'As VP Talent at AIESEC Ukraine, managed talent systems for 700+ people across 16 cities.',
-        'Created recruitment, learning, allocation and leadership-development systems from scratch.'
-      ],
-      signal:'Built from zero and scaled people systems across cities and borders.' },
-    { id:'ventures', short:'Ventures', title:'TalentKapital · Kintaly · AND', place:'Ukraine · Moldova · Romania · CEE', coord:'46°46′N 23°35′E',
-      years:'2008 – 2019', x:39, y:63, unlock:2, treasure:{value:'5×',label:'ventures co-founded'},
-      sub:'Turned training, recruitment and career events into market infrastructure.',
-      points:[
-        'Co-Founder & Managing Partner of TalentKapital Ukraine — business-simulation-based corporate training.',
-        'Co-founded Kintaly / Târgul de Carieră, one of CEE’s largest career-fair businesses; events across 7 countries; sold shares in 2016.',
-        'Trainer at AND, one of Moldova’s top academies — 7+ years of leadership, sales, HR and team programs; later ran CEE’s largest free tech-recruitment event with Cluj Tech Society.'
-      ],
-      signal:'Builder of ventures, communities and buyer trust across HR and L&D.' },
-    { id:'gaus', short:'GAUS', title:'GAUS Algorithm', place:'Estonia', coord:'59°26′N 24°45′E',
-      years:'2017 – 2020', x:50, y:45, unlock:1, treasure:null,
-      sub:'An AI recruitment startup in Estonia in 2017 — before AI was the world’s obsession.',
-      points:[
-        'Co-Founder & CEO of one of CEE’s first AI-powered IT recruitment platforms — secured funding and a place in a leading Estonian B2B accelerator.',
-        'Built the matching algorithm from scratch around tailored recruitment logic and 25+ candidate-engagement signals.',
-        'Ran fundraising, product and go-to-market across EU and Baltic markets — the full startup arc from idea to pivot.'
-      ],
-      signal:'Founder-level fluency in product, funding, acceleration and HR-tech risk.' },
-    { id:'xor', short:'XOR.ai', title:'XOR.ai', place:'Athens / EMEA', coord:'47°30′N 19°02′E',
-      years:'2020 – 2021', x:63, y:60, unlock:3, treasure:null,
-      sub:'Opened an entire region for AI recruitment automation.',
-      points:[
-        'Built XOR.ai’s EMEA commercial territory from zero — no team, no pipeline, no market presence on day one.',
-        'Closed enterprise accounts including MOL Group as the region’s flagship client.',
-        'Translated AI, chatbots and automation into operational value for senior HR leaders when most had never heard of it.'
-      ],
-      signal:'Growth operator who creates markets for technology buyers don’t yet understand.' },
-    { id:'index', short:'Index.dev', title:'Index.dev', place:'Athens, Greece', coord:'37°59′N 23°44′E',
-      years:'2022 – Present', x:73, y:33, unlock:3, treasure:{value:'10×',label:'talent network growth'},
-      sub:'From sourcing to platform, growth, M&A and a board seat.',
-      points:[
-        'Progressed from Director of Sourcing to VP Talent, VP Talent Platform, and Global Growth Partner & Board Member.',
-        'Grew the supply network from 2,000 to 20,000 vetted professionals — 10× in under two years.',
-        'Led the Codemotion.us acquisition & integration and strategic revenue partnerships including Andela.'
-      ],
-      signal:'Remote-talent market builder with board-level growth and partnership exposure.' },
-    { id:'mind', short:'MIND', title:'MIND', place:'Athens, Greece', coord:'37°58′N 23°43′E',
-      years:'2025 – Present', x:85, y:22, unlock:4, treasure:null,
-      sub:'Building at the frontier of AI talent and AI agents.',
-      points:[
-        'Co-building the go-to-market and operational model for an Index.dev spinoff.',
-        'Focused on helping companies find and deploy AI talent and AI agents.',
-        'Extends the remote-talent platform playbook into the next talent category.'
-      ],
-      signal:'The next island: AI talent, agents and practical workforce transformation.' }
-  ];
-
-  const ROMAN=['I','II','III','IV','V','VI'];
-
-  // classic CV content
-  function cvData(){
-    const exp = CHAPTERS.slice().reverse().map(c=>({
-      head:c.title, meta:c.years+' · '+c.place, sub:c.sub, bullets:c.points
-    }));
-    return [
-      {t:'Profile', entries:[{head:'20 years of starting and growing things',meta:'',sub:'I am a builder, not a scorekeeper. I speak the language of HR leaders because I have been one. Today, I am building at board level at Index.dev and co-leading MIND, its AI talent & agents spinoff.',bullets:[]}]},
-      {t:'Experience', entries:exp},
-      {t:'Education', entries:[
-        {head:'Academia de Studii Economice din Moldova',meta:'2015 – 2020',sub:'BASc, Food Science & Technology',bullets:[]},
-        {head:'National College "Gheorghe Lazăr", Bucharest',meta:'1999 – 2003',sub:'Diploma, Social Studies',bullets:[]},
-        {head:'AIESEC International',meta:'2004 – 2008',sub:'Leadership & Organisational Development',bullets:[]}
-      ]},
-      {t:'Certifications & Training', entries:[{head:'',meta:'',sub:'',bullets:[
-        'LinkedIn Recruiter: AI-Powered Talent Acquisition','Prompt Engineering: How to Talk to the AIs',
-        'Claude Code Academy Certificate','Train the Trainers L1 — Edurom, Romania (2005); L2 — AIESEC International, Netherlands (2006)','Attendee — World Staffing Summit 2022'
-      ]}]},
-      {t:'Languages', entries:[{head:'',meta:'',sub:'',bullets:['English (C2 — Proficient)','Romanian (Native)','Russian (C2 — Proficient)','Ukrainian (B1 — Intermediate)','Greek (A2 · Beginner)']}]}
-    ];
-  }
-
-  /* ----------------------------- STATE ----------------------------- */
-  const state = { discovered:new Set(['aiesec']), active:'aiesec' };
-
-  const $=s=>document.querySelector(s);
-  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-
-  /* ----------------------------- BUILD markers + identity ----------------------------- */
-  const markersWrap=$('#markers');
-  const markerEls={};
-  CHAPTERS.forEach((c,i)=>{
-    const el=document.createElement('button');
-    el.className='island';
-    el.style.setProperty('--x',c.x+'%'); el.style.setProperty('--y',c.y+'%');
-    el.setAttribute('aria-label','Review '+c.title);
-    el.innerHTML=`<span class="ring"></span><span class="node">${String(i+1).padStart(2,'0')}</span><span class="pill">${esc(c.short)}</span><span class="coord">${esc(c.coord)}</span>`;
-    el.addEventListener('click',()=>select(c.id));
-    markersWrap.appendChild(el);
-    markerEls[c.id]=el;
-  });
-
-  const assembledWrap=$('#assembled');
-  IDENTITY.forEach((name,i)=>{
-    const el=document.createElement('div');
-    el.className='line-part';
-    el.innerHTML=`<span class="lp-num">0${i+1}</span><span>${esc(name)}</span>`;
-    assembledWrap.appendChild(el);
-  });
-  const lineParts=[...assembledWrap.children];
-
-  /* ----------------------------- ACTIONS ----------------------------- */
-  function select(id){ state.discovered.add(id); state.active=id; render(); }
-
-  /* ----------------------------- RENDER ----------------------------- */
-  function render(){
-    const disc=state.discovered;
-    const nextIdx=CHAPTERS.findIndex(c=>!disc.has(c.id));
-    const count=disc.size, total=CHAPTERS.length;
-
-    // markers
-    CHAPTERS.forEach((c,i)=>{
-      const el=markerEls[c.id];
-      const found=disc.has(c.id);
-      el.classList.toggle('found',found);
-      el.classList.toggle('active',state.active===c.id);
-      el.classList.toggle('next',!found && i===nextIdx);
-      el.setAttribute('aria-pressed',state.active===c.id ? 'true' : 'false');
-      el.querySelector('.ring').style.display=(!found && i===nextIdx)?'block':'none';
-    });
-
-    // route through reviewed milestones in career order
-    $('#routeLine').setAttribute('points', CHAPTERS.filter(c=>disc.has(c.id)).map(c=>c.x+','+c.y).join(' '));
-
-    // hint
-    $('#mapHint').textContent = count===total
-      ? 'Six milestones reviewed · Twenty years of building'
-      : (nextIdx>=0 ? 'Select a milestone · '+count+' of '+total+' reviewed' : '');
-
-    // chapter panel
-    const c=CHAPTERS.find(x=>x.id===state.active);
-    const idx=CHAPTERS.findIndex(x=>x.id===state.active);
-    $('#chapIdx').textContent='Milestone '+ROMAN[idx];
-    $('#chapProg').textContent=count+' / '+total+' reviewed';
-    $('#chapYears').textContent=c.years;
-    $('#chapPlace').textContent=c.place;
-    $('#chapTitle').textContent=c.title;
-    $('#chapSub').textContent=c.sub;
-    $('#chapPoints').innerHTML=c.points.map(p=>`<li>${esc(p)}</li>`).join('');
-    $('#chapSignal').textContent=c.signal;
-    $('#chapTreasureWrap').innerHTML = c.treasure
-      ? `<div class="chap-treasure"><b>${esc(c.treasure.value)}</b><em>evidence · ${esc(c.treasure.label)}</em></div>` : '';
-
-    // identity assembly
-    lineParts.forEach((part,i)=>{
-      const unlocked=[...disc].some(id=>{ const ch=CHAPTERS.find(x=>x.id===id); return ch && ch.unlock>=i; });
-      part.classList.toggle('active',unlocked);
-    });
-  }
-
-  /* ----------------------------- CV MODAL ----------------------------- */
-  const cvModal=$('#cvModal');
-  $('#cvSections').innerHTML = cvData().map(sec=>`
-    <div class="cv-sec"><div class="t">${esc(sec.t)}</div>
-      ${sec.entries.map(e=>`<div class="cv-entry">
-        <div class="h"><div class="head">${esc(e.head)}</div><div class="meta">${esc(e.meta)}</div></div>
-        ${e.sub?`<div class="sub">${esc(e.sub)}</div>`:''}
-        ${e.bullets.map(b=>`<div class="b"><span>${esc(b)}</span></div>`).join('')}
-      </div>`).join('')}
-    </div>`).join('');
-
-  function openCV(e){ if(e) e.preventDefault(); cvModal.classList.add('open'); cvModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-  function closeCV(){ cvModal.classList.remove('open'); cvModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-  document.querySelectorAll('[data-open-cv]').forEach(b=>b.addEventListener('click',openCV));
-  $('#cvClose').addEventListener('click',closeCV);
-  $('#cvPrint').addEventListener('click',()=>window.print());
-  cvModal.addEventListener('click',e=>{ if(e.target===cvModal) closeCV(); });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && cvModal.classList.contains('open')) closeCV(); });
-
-  render();
-})();
-</script>
+  <dialog id="cv-dialog" aria-labelledby="cv-name"><div class="cv-tools"><span>Curriculum vitae</span><div><button id="cv-print"><i data-icon="Printer"></i><span>Print / Save PDF</span></button><button id="cv-close" class="icon-button" aria-label="Close CV" title="Close CV" autofocus><i data-icon="X"></i></button></div></div><div class="cv-document"><h2 id="cv-name">Eugeniu Girla</h2><p class="cv-subtitle">5&times; Founder &amp; Builder &middot; HR Technology &middot; AI &amp; Talent</p><p class="cv-contact">Athens, Greece &middot; eugen.girla@gmail.com &middot; +30 698 018 48 70 &middot; in/eugeniugirla</p><div id="cv-content"><section class="cv-section"><h3>Profile</h3><div class="cv-entry"><header><h4>20 years of starting and growing things</h4></header><p>I am a builder, not a scorekeeper. I speak the language of HR leaders because I have been one. Today, I am building at board level at Index.dev and co-leading MIND, its AI talent &amp; agents spinoff.</p></div></section>
+<section class="cv-section"><h3>Experience</h3><div class="cv-entry"><header><h4>MIND</h4><span>2025 – Present · Athens, Greece</span></header><p>Building at the frontier of AI talent and AI agents.</p><ul><li>Co-building the go-to-market and operational model for an Index.dev spinoff.</li><li>Focused on helping companies find and deploy AI talent and AI agents.</li><li>Extends the remote-talent platform playbook into the next talent category.</li></ul></div><div class="cv-entry"><header><h4>Index.dev</h4><span>2022 – Present · Athens, Greece</span></header><p>From sourcing to platform, growth, M&amp;A and a board seat.</p><ul><li>Progressed from Director of Sourcing to VP Talent, VP Talent Platform, and Global Growth Partner &amp; Board Member.</li><li>Grew the supply network from 2,000 to 20,000 vetted professionals — 10× in under two years.</li><li>Led the Codemotion.us acquisition &amp; integration and strategic revenue partnerships including Andela.</li></ul></div><div class="cv-entry"><header><h4>XOR.ai</h4><span>2020 – 2021 · Athens / EMEA</span></header><p>Opened an entire region for AI recruitment automation.</p><ul><li>Built XOR.ai’s EMEA commercial territory from zero — no team, no pipeline, no market presence on day one.</li><li>Closed enterprise accounts including MOL Group as the region’s flagship client.</li><li>Translated AI, chatbots and automation into operational value for senior HR leaders when most had never heard of it.</li></ul></div><div class="cv-entry"><header><h4>GAUS Algorithm</h4><span>2017 – 2020 · Estonia</span></header><p>An AI recruitment startup in Estonia in 2017 — before AI was the world’s obsession.</p><ul><li>Co-Founder &amp; CEO of one of CEE’s first AI-powered IT recruitment platforms — secured funding and a place in a leading Estonian B2B accelerator.</li><li>Built the matching algorithm from scratch around tailored recruitment logic and 25+ candidate-engagement signals.</li><li>Ran fundraising, product and go-to-market across EU and Baltic markets — the full startup arc from idea to pivot.</li></ul></div><div class="cv-entry"><header><h4>TalentKapital · Kintaly · AND</h4><span>2008 – 2019 · Ukraine · Moldova · Romania · CEE</span></header><p>Turned training, recruitment and career events into market infrastructure.</p><ul><li>Co-Founder &amp; Managing Partner of TalentKapital Ukraine — business-simulation-based corporate training.</li><li>Co-founded Kintaly / Târgul de Carieră, one of CEE’s largest career-fair businesses; events across 7 countries; sold shares in 2016.</li><li>Trainer at AND, one of Moldova’s top academies — 7+ years of leadership, sales, HR and team programs; later ran CEE’s largest free tech-recruitment event with Cluj Tech Society.</li></ul></div><div class="cv-entry"><header><h4>AIESEC Moldova &amp; Ukraine</h4><span>2005 – 2008 · Moldova &amp; Ukraine</span></header><p>Built the first leadership operating system — from a blank sheet at nineteen.</p><ul><li>Built AIESEC Moldova from a blank sheet into one of the country’s strongest youth organizations — still running today.</li><li>As VP Talent at AIESEC Ukraine, managed talent systems for 700+ people across 16 cities.</li><li>Created recruitment, learning, allocation and leadership-development systems from scratch.</li></ul></div></section>
+<section class="cv-section"><h3>Education</h3><div class="cv-entry"><header><h4>Academia de Studii Economice din Moldova</h4><span>2015 – 2020</span></header><p>BASc, Food Science &amp; Technology</p></div><div class="cv-entry"><header><h4>National College &quot;Gheorghe Lazăr&quot;, Bucharest</h4><span>1999 – 2003</span></header><p>Diploma, Social Studies</p></div><div class="cv-entry"><header><h4>AIESEC International</h4><span>2004 – 2008</span></header><p>Leadership &amp; Organisational Development</p></div></section>
+<section class="cv-section"><h3>Certifications &amp; Training</h3><div class="cv-entry"><ul><li>LinkedIn Recruiter: AI-Powered Talent Acquisition</li><li>Prompt Engineering: How to Talk to the AIs</li><li>Claude Code Academy Certificate</li><li>Train the Trainers L1 — Edurom, Romania (2005); L2 — AIESEC International, Netherlands (2006)</li><li>Attendee — World Staffing Summit 2022</li></ul></div></section>
+<section class="cv-section"><h3>Languages</h3><div class="cv-entry"><ul><li>English (C2 — Proficient)</li><li>Romanian (Native)</li><li>Russian (C2 — Proficient)</li><li>Ukrainian (B1 — Intermediate)</li><li>Greek (A2 · Beginner)</li></ul></div></section></div></div></dialog>
 </body>
 </html>
